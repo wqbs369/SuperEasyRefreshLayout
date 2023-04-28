@@ -290,8 +290,11 @@ public class SuperEasyRefreshLayout extends ViewGroup {
                 float yDiff = y - mInitialDownY;
                 if(!canChildScrollUp()){//若是顶部不能滑动，则yDiff是正值，直接与mTouchSlop做比较。
                     yDiff = yDiff;
-                }if(!canChildScrollDown()){//若是底部不能滑动，则yDiff是负值，取反后与mTouchSlop做比较。
+                }
+                if(!canChildScrollDown()){//若是底部不能滑动，则yDiff是负值，取反后与mTouchSlop做比较。
+                   if (yDiff < 0 || canChildScrollUp()) {
                     yDiff = -yDiff;
+                    }
                 }
                 if (yDiff > mTouchSlop && !mIsBeingDragged) {
                     mInitialMotionY = mInitialDownY + mTouchSlop;
